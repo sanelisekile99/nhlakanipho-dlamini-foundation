@@ -1,5 +1,7 @@
-import React from 'react';
+import { useState } from 'react';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { db } from '../firebaseConfig';
+import { collection, addDoc } from 'firebase/firestore';
 
 const Contact = () => {
   const contactInfo = [
@@ -11,7 +13,7 @@ const Contact = () => {
     {
       icon: <Phone className="h-6 w-6" />,
       title: "Phone",
-      details: ["+27 XX XXX XXXX", "Available Mon-Fri 8AM-5PM"]
+      details: ["+27 79 422 2745", "Available Mon-Fri 8AM-5PM"]
     },
     {
       icon: <Mail className="h-6 w-6" />,
@@ -19,6 +21,29 @@ const Contact = () => {
       details: ["info@nhlakaniphofoundation.org", "We'll respond within 24 hours"]
     }
   ];
+
+  const [form, setForm] = useState({
+    firstName: '', lastName: '', email: '', subject: 'General Inquiry', message: ''
+  });
+  const [success, setSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      await addDoc(collection(db, "messages"), form);
+      setSuccess(true);
+      setForm({ firstName: '', lastName: '', email: '', subject: 'General Inquiry', message: '' });
+    } catch (error) {
+      alert("Error sending message. Please try again.");
+    }
+    setLoading(false);
+  };
 
   return (
     <section id="contact" className="py-20 bg-blue-900 text-white">
@@ -66,38 +91,54 @@ const Contact = () => {
 
           <div className="bg-white text-gray-900 rounded-2xl p-8">
             <h3 className="text-2xl font-bold text-blue-900 mb-6">Send us a Message</h3>
-            <form className="space-y-6">
+            {success && <div className="mb-4 text-green-600 font-semibold">Thank you! Your message has been sent.</div>}
+            <form className="space-y-6" onSubmit={handleSubmit}>
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">First Name</label>
-                  <input 
-                    type="text" 
+                  <input
+                    type="text"
+                    name="firstName"
+                    value={form.firstName}
+                    onChange={handleChange}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-colors"
                     placeholder="Your first name"
+                    required
                   />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
-                  <input 
-                    type="text" 
+                  <input
+                    type="text"
+                    name="lastName"
+                    value={form.lastName}
+                    onChange={handleChange}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-colors"
                     placeholder="Your last name"
+                    required
                   />
                 </div>
               </div>
-              
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                <input 
-                  type="email" 
+                <input
+                  type="email"
+                  name="email"
+                  value={form.email}
+                  onChange={handleChange}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-colors"
                   placeholder="your.email@example.com"
+                  required
                 />
               </div>
-              
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Subject</label>
-                <select className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-colors">
+                <select
+                  name="subject"
+                  value={form.subject}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-colors"
+                >
                   <option>General Inquiry</option>
                   <option>Volunteer Opportunities</option>
                   <option>Partnership</option>
@@ -105,18 +146,24 @@ const Contact = () => {
                   <option>Media Inquiry</option>
                 </select>
               </div>
-              
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Message</label>
-                <textarea 
+                <textarea
+                  name="message"
                   rows={5}
+                  value={form.message}
+                  onChange={handleChange}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-colors resize-none"
                   placeholder="Tell us how you'd like to get involved or any questions you have..."
+                  required
                 ></textarea>
               </div>
-              
-              <button className="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-4 px-6 rounded-lg transition-colors duration-300 flex items-center justify-center">
-                Send Message
+              <button
+                type="submit"
+                className="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-4 px-6 rounded-lg transition-colors duration-300 flex items-center justify-center"
+                disabled={loading}
+              >
+                {loading ? 'Sending...' : 'Send Message'}
                 <Send className="ml-2 h-5 w-5" />
               </button>
             </form>

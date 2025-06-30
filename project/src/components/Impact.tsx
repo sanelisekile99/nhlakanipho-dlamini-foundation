@@ -33,20 +33,17 @@ const Impact = () => {
     {
       name: "Nomsa Mthembu",
       role: "Community Leader",
-      content: "The Sunrise Engozini Water Project has completely transformed our daily lives. Our families no longer walk long distances for clean water, and the home garden program has taught us how to grow vegetables despite changing weather patterns.",
-      image: "https://images.pexels.com/photos/1559486/pexels-photo-1559486.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&fit=crop"
+      content: "The Sunrise Engozini Water Project has completely transformed our daily lives. Our families no longer walk long distances for clean water, and the home garden program has taught us how to grow vegetables despite changing weather patterns."
     },
     {
       name: "Sipho Ndlovu",
       role: "Local Farmer & Garden Participant",
-      content: "Dr Dlamini's foundation taught us about climate change and how to adapt our growing methods. The 'One Home, One Garden' program has improved our food security and helped us understand new agricultural techniques.",
-      image: "https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&fit=crop"
+      content: "Dr Dlamini's foundation taught us about climate change and how to adapt our growing methods. The 'One Home, One Garden' program has improved our food security and helped us understand new agricultural techniques."
     },
     {
       name: "Thandi Mhlongo",
       role: "Youth Program Participant",
-      content: "The June 16 Youth Day event was inspiring. The guest speakers from different departments shared their journeys and gave us practical advice about career opportunities. The foundation also helped me with job applications.",
-      image: "https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&fit=crop"
+      content: "The June 16 Youth Day event was inspiring. The guest speakers from different departments shared their journeys and gave us practical advice about career opportunities. The foundation also helped me with job applications."
     }
   ];
 
@@ -123,16 +120,9 @@ const Impact = () => {
                     "{testimonial.content}"
                   </blockquote>
                 </div>
-                <div className="flex items-center">
-                  <img 
-                    src={testimonial.image}
-                    alt={testimonial.name}
-                    className="w-12 h-12 rounded-full object-cover mr-3"
-                  />
-                  <div>
-                    <div className="font-semibold text-blue-900 text-sm">{testimonial.name}</div>
-                    <div className="text-gray-600 text-xs">{testimonial.role}</div>
-                  </div>
+                <div>
+                  <div className="font-semibold text-blue-900 text-sm">{testimonial.name}</div>
+                  <div className="text-gray-600 text-xs">{testimonial.role}</div>
                 </div>
               </div>
             ))}
