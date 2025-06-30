@@ -4,14 +4,13 @@ import logo from '../img/nhlakapho logo1.jpg';
 
 const Hero = () => {
   return (
-    <section id="home" className="relative bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 text-white">
-      <div className="absolute inset-0 bg-black opacity-20"></div>
+    <section id="home" className="relative bg-blue-900 text-white">
+      {/* Solid blue background, overlay logo with less opacity */}
       <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30"
-        style={{
-          backgroundImage: `url(${logo})`
-        }}
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
+        style={{ backgroundImage: `url(${logo})` }}
       ></div>
+      <div className="absolute inset-0 bg-blue-900 opacity-80"></div>
       <div className="absolute top-8 left-8 z-10">
         <img src={logo} alt="Nhlakanipho Dlamini Foundation Logo" className="h-20 w-auto drop-shadow-lg" />
       </div>
