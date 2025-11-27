@@ -113,7 +113,7 @@ const Work = () => {
                       {project.status}
                     </span>
                   </div>
-                  <div className="absolute top-4 left-4 bg-white p-3 rounded-full shadow-lg">
+                  <div className="absolute top-4 left-4 glass-white p-3 rounded-full shadow-lg">
                     <div className="text-blue-600">{project.icon}</div>
                   </div>
                 </div>

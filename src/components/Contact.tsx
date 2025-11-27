@@ -78,7 +78,7 @@ const Contact = () => {
               ))}
             </div>
 
-            <div className="mt-12 p-6 bg-blue-800 rounded-xl">
+            <div className="mt-12 p-6 glass rounded-xl">
               <h4 className="font-semibold text-lg mb-3">How You Can Help</h4>
               <ul className="space-y-2 text-blue-100">
                 <li>• Volunteer for community projects</li>
@@ -89,7 +89,7 @@ const Contact = () => {
             </div>
           </div>
 
-          <div className="bg-white text-gray-900 rounded-2xl p-8">
+          <div className="glass-white text-gray-900 rounded-2xl p-8 shadow-2xl">
             <h3 className="text-2xl font-bold text-blue-900 mb-6">Send us a Message</h3>
             {success && <div className="mb-4 text-green-600 font-semibold">Thank you! Your message has been sent.</div>}
             <form className="space-y-6" onSubmit={handleSubmit}>

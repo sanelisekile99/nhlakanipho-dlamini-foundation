@@ -88,7 +88,7 @@ const Impact = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
           {stats.map((stat, index) => (
-            <div key={index} className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300 text-center">
+            <div key={index} className="glass-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 text-center transform hover:scale-105">
               <div className="text-blue-600 mb-4 flex justify-center">{stat.icon}</div>
               <div className="text-4xl font-bold text-blue-900 mb-2">{stat.number}</div>
               <div className="text-lg font-semibold text-blue-900 mb-2">{stat.label}</div>
@@ -101,7 +101,7 @@ const Impact = () => {
           <h3 className="text-3xl font-bold text-center text-blue-900 mb-12">Our Program Areas</h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {programs.map((program, index) => (
-              <div key={index} className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 text-center">
+              <div key={index} className="glass-white rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 text-center transform hover:scale-105">
                 <div className="text-green-600 mb-4 flex justify-center">{program.icon}</div>
                 <h4 className="text-lg font-semibold text-blue-900 mb-2">{program.title}</h4>
                 <p className="text-gray-600 text-sm">{program.description}</p>
@@ -110,7 +110,7 @@ const Impact = () => {
           </div>
         </div>
 
-        <div className="bg-white rounded-3xl p-8 lg:p-12 shadow-lg">
+        <div className="glass-white rounded-3xl p-8 lg:p-12 shadow-2xl">
           <h3 className="text-3xl font-bold text-center text-blue-900 mb-12">Community Voices</h3>
           <div className="grid lg:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (

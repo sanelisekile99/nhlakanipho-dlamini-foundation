@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Heart } from 'lucide-react';
 import logo from '../img/nhlakapho logo1.jpg';
 
 const Header = () => {
@@ -10,11 +10,13 @@ const Header = () => {
     { name: 'About', href: '#about' },
     { name: 'Our Work', href: '#work' },
     { name: 'Impact', href: '#impact' },
+    { name: 'Events', href: '#events' },
+    { name: 'Donate', href: '#donate' },
     { name: 'Contact', href: '#contact' },
   ];
 
   return (
-    <header className="bg-white shadow-sm sticky top-0 z-50">
+    <header className="glass-white shadow-lg sticky top-0 z-50">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
@@ -29,8 +31,13 @@ const Header = () => {
                 <a
                   key={item.name}
                   href={item.href}
-                  className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200"
+                  className={`${
+                    item.name === 'Donate'
+                      ? 'bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg font-semibold shadow-lg transform hover:scale-105'
+                      : 'text-gray-700 hover:text-blue-600 px-3 py-2'
+                  } text-sm font-medium transition-all duration-200`}
                 >
+                  {item.name === 'Donate' && <Heart className="inline h-4 w-4 mr-1" />}
                   {item.name}
                 </a>
               ))}
@@ -54,9 +61,14 @@ const Header = () => {
                 <a
                   key={item.name}
                   href={item.href}
-                  className="text-gray-700 hover:text-blue-600 block px-3 py-2 text-base font-medium"
+                  className={`${
+                    item.name === 'Donate'
+                      ? 'bg-green-500 hover:bg-green-600 text-white text-center rounded-lg font-semibold shadow-lg'
+                      : 'text-gray-700 hover:text-blue-600'
+                  } block px-3 py-2 text-base font-medium`}
                   onClick={() => setIsMenuOpen(false)}
                 >
+                  {item.name === 'Donate' && <Heart className="inline h-4 w-4 mr-1" />}
                   {item.name}
                 </a>
               ))}

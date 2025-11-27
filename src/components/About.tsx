@@ -57,7 +57,7 @@ const About = () => {
                   className="object-cover w-full h-96 object-top"
               />
             </div>
-            <div className="absolute -bottom-6 -left-6 bg-green-500 text-white p-6 rounded-xl shadow-lg">
+            <div className="absolute -bottom-6 -left-6 glass-blue text-white p-6 rounded-xl shadow-lg">
               <div className="text-2xl font-bold">100+</div>
               <div className="text-sm">Households Served</div>
             </div>
@@ -68,7 +68,7 @@ const About = () => {
           <h3 className="text-3xl font-bold text-center text-blue-900 mb-12">Our Core Values</h3>
           <div className="grid md:grid-cols-3 gap-8">
             {values.map((value, index) => (
-              <div key={index} className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <div key={index} className="glass-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
                 <div className="text-green-600 mb-4">{value.icon}</div>
                 <h4 className="text-xl font-semibold text-blue-900 mb-3">{value.title}</h4>
                 <p className="text-gray-600 leading-relaxed">{value.description}</p>

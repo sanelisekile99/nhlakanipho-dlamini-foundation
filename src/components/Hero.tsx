@@ -33,23 +33,37 @@ const Hero = () => {
           </p>
           
           <div className="grid md:grid-cols-2 gap-6 mb-8">
-            <div className="bg-blue-800 bg-opacity-50 p-4 rounded-lg">
+            <div className="glass p-6 rounded-lg shadow-xl transform hover:scale-105 transition-all duration-300">
               <div className="text-2xl font-bold text-green-400">100+</div>
               <div className="text-blue-100">Households with Water Access</div>
             </div>
-            <div className="bg-blue-800 bg-opacity-50 p-4 rounded-lg">
+            <div className="glass p-6 rounded-lg shadow-xl transform hover:scale-105 transition-all duration-300">
               <div className="text-2xl font-bold text-green-400">25</div>
               <div className="text-blue-100">Trees Planted for Environment</div>
             </div>
           </div>
           
           <div className="flex flex-col sm:flex-row gap-4">
-            <button className="bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-lg font-semibold flex items-center justify-center transition-all duration-300 transform hover:scale-105 shadow-lg">
+            <button 
+              onClick={() => document.getElementById('donate')?.scrollIntoView({ behavior: 'smooth' })}
+              className="bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-lg font-semibold flex items-center justify-center transition-all duration-300 transform hover:scale-105 shadow-lg"
+            >
+              <Heart className="mr-2 h-5 w-5" />
+              Donate Now
+            </button>
+            
+            <button 
+              onClick={() => document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' })}
+              className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold flex items-center justify-center transition-all duration-300 transform hover:scale-105 shadow-lg"
+            >
               Learn About Our Programs
               <ArrowRight className="ml-2 h-5 w-5" />
             </button>
             
-            <button className="border-2 border-white text-white hover:bg-white hover:text-blue-900 px-8 py-4 rounded-lg font-semibold transition-all duration-300">
+            <button 
+              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+              className="border-2 border-white text-white hover:bg-white hover:text-blue-900 px-8 py-4 rounded-lg font-semibold transition-all duration-300"
+            >
               Get Involved
             </button>
           </div>

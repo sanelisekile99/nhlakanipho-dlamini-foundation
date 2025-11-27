@@ -4,6 +4,8 @@ import Hero from './components/Hero';
 import About from './components/About';
 import Work from './components/Work';
 import Impact from './components/Impact';
+import Events from './components/Events';
+import Donate from './components/Donate';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 
@@ -15,6 +17,8 @@ function App() {
       <About />
       <Work />
       <Impact />
+      <Events />
+      <Donate />
       <Contact />
       <Footer />
     </div>
