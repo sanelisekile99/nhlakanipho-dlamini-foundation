@@ -3,28 +3,29 @@ import { Droplets, Heart, TreePine, Users, Home, Calendar } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer className="bg-blue-900 text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid md:grid-cols-4 gap-8">
+    <footer className="relative overflow-hidden bg-slate-950 text-white">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(34,197,94,0.12),transparent_28%),linear-gradient(180deg,#020617_0%,#0f172a_100%)]"></div>
+      <div className="section-container relative py-16">
+        <div className="grid gap-8 md:grid-cols-4">
           <div>
             <div className="flex items-center mb-4">
               <Droplets className="h-8 w-8 text-green-400 mr-2" />
               <div>
-                <h3 className="text-lg font-bold">Nhlakanipho Dlamini</h3>
-                <p className="text-sm text-blue-200">Foundation</p>
+                <h3 className="font-serif text-2xl font-semibold">Nhlakanipho Dlamini</h3>
+                <p className="text-sm uppercase tracking-[0.24em] text-blue-200">Foundation</p>
               </div>
             </div>
-            <p className="text-blue-200 leading-relaxed">
+            <p className="text-blue-100/90 leading-8">
               Transforming communities in Nquthu municipality through comprehensive development programs addressing water access, climate change, agriculture, and youth empowerment.
             </p>
           </div>
           
           <div>
-            <h4 className="font-semibold text-lg mb-4 flex items-center">
+            <h4 className="font-semibold text-lg mb-4 flex items-center text-white">
               <Droplets className="h-5 w-5 mr-2 text-green-400" />
               Water & Environment
             </h4>
-            <ul className="space-y-2 text-blue-200">
+            <ul className="space-y-3 text-blue-100/80">
               <li>Sunrise Engozini Water Project</li>
               <li>Community Water Taps</li>
               <li>Tree Planting Initiative</li>
@@ -33,11 +34,11 @@ const Footer = () => {
           </div>
           
           <div>
-            <h4 className="font-semibold text-lg mb-4 flex items-center">
+            <h4 className="font-semibold text-lg mb-4 flex items-center text-white">
               <Home className="h-5 w-5 mr-2 text-green-400" />
               Agriculture & Food
             </h4>
-            <ul className="space-y-2 text-blue-200">
+            <ul className="space-y-3 text-blue-100/80">
               <li>One Home, One Garden</li>
               <li>Climate-Adapted Growing</li>
               <li>Food Security Programs</li>
@@ -46,11 +47,11 @@ const Footer = () => {
           </div>
           
           <div>
-            <h4 className="font-semibold text-lg mb-4 flex items-center">
+            <h4 className="font-semibold text-lg mb-4 flex items-center text-white">
               <Users className="h-5 w-5 mr-2 text-green-400" />
               Youth & Community
             </h4>
-            <ul className="space-y-2 text-blue-200">
+            <ul className="space-y-3 text-blue-100/80">
               <li>Youth Empowerment</li>
               <li>Job Application Assistance</li>
               <li>June 16 Youth Day Events</li>
@@ -59,12 +60,12 @@ const Footer = () => {
           </div>
         </div>
         
-        <div className="border-t border-blue-800 mt-12 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-blue-200 text-sm">
+        <div className="mt-12 border-t border-white/10 pt-8">
+          <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
+            <p className="text-blue-100/70 text-sm">
               © 2024 Nhlakanipho Dlamini Foundation. All rights reserved.
             </p>
-            <div className="flex items-center mt-4 md:mt-0 text-blue-200 text-sm">
+            <div className="flex items-center text-blue-100/70 text-sm">
               <span>Made with</span>
               <Heart className="h-4 w-4 text-red-400 mx-1" />
               <span>for Nquthu communities</span>

@@ -1,6 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-slate-50 text-slate-700 antialiased;
+    background-image:
+      radial-gradient(circle at top left, rgba(191, 219, 254, 0.45), transparent 34%),
+      radial-gradient(circle at top right, rgba(34, 197, 94, 0.14), transparent 30%),
+      linear-gradient(180deg, #f8fafc 0%, #f8fafc 100%);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-serif tracking-[0.01em] text-balance;
+  }
+
+  p {
+    @apply leading-8;
+  }
+
+  ::selection {
+    background: rgba(30, 64, 175, 0.18);
+  }
+}
+
+@layer components {
+  .section-shell {
+    @apply relative overflow-hidden py-24 sm:py-28;
+  }
+
+  .section-container {
+    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-header {
+    @apply mx-auto mb-16 max-w-3xl text-center;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white/70 px-4 py-1.5 text-sm font-semibold uppercase tracking-[0.28em] shadow-sm backdrop-blur;
+  }
+
+  .section-title {
+    @apply mt-6 text-4xl font-semibold leading-tight text-blue-950 sm:text-5xl;
+  }
+
+  .section-copy {
+    @apply mt-5 text-lg leading-8 text-slate-600 sm:text-xl;
+  }
+
+  .surface-card {
+    @apply rounded-[28px] border border-slate-200/80 bg-white/85 shadow-[0_18px_60px_rgba(15,23,42,0.08)] backdrop-blur-sm;
+  }
+
+  .surface-card-dark {
+    @apply rounded-[28px] border border-white/15 bg-white/10 shadow-[0_18px_60px_rgba(2,6,23,0.28)] backdrop-blur-md;
+  }
+
+  .lift-card {
+    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_22px_70px_rgba(15,23,42,0.14)];
+  }
+
+  .subtle-grid {
+    background-image: linear-gradient(rgba(148, 163, 184, 0.12) 1px, transparent 1px), linear-gradient(90deg, rgba(148, 163, 184, 0.12) 1px, transparent 1px);
+    background-size: 34px 34px;
+  }
+
+  .elegant-button-primary {
+    @apply inline-flex items-center justify-center rounded-full bg-green-500 px-6 py-3.5 font-semibold text-white shadow-lg shadow-green-900/10 transition-all duration-300 hover:-translate-y-0.5 hover:bg-green-600 hover:shadow-xl;
+  }
+
+  .elegant-button-secondary {
+    @apply inline-flex items-center justify-center rounded-full border border-blue-200 bg-white/80 px-6 py-3.5 font-semibold text-blue-900 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-blue-300 hover:bg-white;
+  }
+
+  .input-elegant {
+    @apply w-full rounded-2xl border border-slate-200 bg-white px-4 py-3.5 text-slate-900 outline-none transition-all duration-200 placeholder:text-slate-400 focus:border-blue-300 focus:ring-4 focus:ring-blue-100;
+  }
+}
 
 @layer utilities {
   /* Glassmorphism effect */

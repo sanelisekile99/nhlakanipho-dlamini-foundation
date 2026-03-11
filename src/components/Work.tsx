@@ -83,67 +83,67 @@ const Work = () => {
   };
 
   return (
-    <section id="work" className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <div className="flex items-center justify-center mb-4">
-            <Droplets className="h-6 w-6 text-blue-600 mr-2" />
-            <span className="text-blue-600 font-semibold uppercase tracking-wide">Our Programs</span>
+    <section id="work" className="section-shell bg-white/40">
+      <div className="section-container">
+        <div className="section-header">
+          <div className="eyebrow text-blue-700">
+            <Droplets className="h-4 w-4" />
+            Our Programs
           </div>
-          <h2 className="text-4xl font-bold text-blue-900 mb-6">
+          <h2 className="section-title">
             Comprehensive Community Development
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="section-copy">
             From water access and climate education to agricultural support and youth empowerment, our programs address the interconnected challenges facing Nquthu municipality communities.
           </p>
         </div>
 
         <div className="space-y-16">
           {projects.map((project, index) => (
-            <div key={project.id} className={`grid lg:grid-cols-2 gap-12 items-center ${index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''}`}>
+            <div key={project.id} className={`surface-card grid items-center gap-10 overflow-hidden p-6 lg:grid-cols-2 lg:p-8 ${index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''}`}>
               <div className={`${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
                 <div className="relative">
                   <img 
                     src={project.image}
                     alt={project.title}
-                    className={`rounded-2xl shadow-xl w-full h-80 object-contain bg-white${project.title === 'Youth Empowerment Program' ? ' scale-100' : ' object-center scale-95'}`}
+                    className={`h-80 w-full rounded-[24px] bg-slate-50 object-contain shadow-xl ${project.title === 'Youth Empowerment Program' ? 'scale-100' : 'object-center scale-95'}`}
                   />
                   <div className="absolute top-4 right-4">
-                    <span className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(project.status)}`}>
+                    <span className={`rounded-full px-4 py-1.5 text-sm font-medium shadow-sm ${getStatusColor(project.status)}`}>
                       {project.status}
                     </span>
                   </div>
-                  <div className="absolute top-4 left-4 glass-white p-3 rounded-full shadow-lg">
+                  <div className="absolute top-4 left-4 rounded-full bg-white/90 p-3 shadow-lg backdrop-blur-sm">
                     <div className="text-blue-600">{project.icon}</div>
                   </div>
                 </div>
               </div>
               
               <div className={`${index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
-                <h3 className="text-3xl font-bold text-blue-900 mb-4">{project.title}</h3>
+                <h3 className="text-4xl font-semibold text-blue-950">{project.title}</h3>
                 
-                <div className="flex flex-wrap gap-6 mb-6 text-sm">
-                  <div className="flex items-center text-gray-600">
+                <div className="mt-5 flex flex-wrap gap-6 text-sm">
+                  <div className="flex items-center text-slate-500">
                     <Droplets className="h-4 w-4 mr-1" />
                     {project.location}
                   </div>
-                  <div className="flex items-center text-gray-600">
+                  <div className="flex items-center text-slate-500">
                     <Users className="h-4 w-4 mr-1" />
                     {project.beneficiaries}
                   </div>
                 </div>
                 
-                <p className="text-gray-700 text-lg leading-relaxed mb-6">
+                <p className="mt-6 text-lg text-slate-600">
                   {project.description}
                 </p>
                 
-                <div>
-                  <h4 className="font-semibold text-blue-900 mb-3">Key Achievements:</h4>
+                <div className="mt-6">
+                  <h4 className="font-semibold uppercase tracking-[0.2em] text-blue-800">Key Achievements</h4>
                   <ul className="space-y-2">
                     {project.impact.map((item, idx) => (
-                      <li key={idx} className="flex items-start">
+                      <li key={idx} className="flex items-start rounded-2xl bg-slate-50 px-4 py-3">
                         <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                        <span className="text-gray-700">{item}</span>
+                        <span className="text-slate-700">{item}</span>
                       </li>
                     ))}
                   </ul>

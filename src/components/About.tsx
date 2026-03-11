@@ -21,21 +21,21 @@ const About = () => {
   ];
 
   return (
-    <section id="about" className="py-20 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="about" className="section-shell">
+      <div className="section-container">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div>
-            <div className="flex items-center mb-4">
-              <User className="h-6 w-6 text-green-600 mr-2" />
-              <span className="text-green-600 font-semibold uppercase tracking-wide">About Our Founder</span>
+            <div className="eyebrow text-green-700">
+              <User className="h-4 w-4" />
+              About Our Founder
             </div>
             
-            <h2 className="text-4xl font-bold text-blue-900 mb-6">
+            <h2 className="section-title max-w-xl">
               Dr Nhlakanipho Dlamini
             </h2>
             
-            <div className="space-y-6 text-gray-700 leading-relaxed">
-              <p className="text-lg">
+            <div className="mt-8 space-y-6 text-slate-600">
+              <p className="text-lg text-slate-700">
                 A visionary leader with deep roots in agriculture and community development, Dr Nhlakanipho Dlamini founded this organization with a comprehensive mission: to address climate change impacts, ensure water access, promote sustainable agriculture, and empower youth in Nquthu municipality.
               </p>
               
@@ -50,28 +50,29 @@ const About = () => {
           </div>
           
           <div className="relative">
-            <div className="aspect-w-4 aspect-h-5 rounded-2xl overflow-hidden shadow-2xl">
+            <div className="surface-card overflow-hidden p-3">
               <img 
                 src={nhlakaniphoPhoto}
                 alt="Dr Nhlakanipho Dlamini"
-                  className="object-cover w-full h-96 object-top"
+                className="h-[28rem] w-full rounded-[22px] object-cover object-top"
               />
             </div>
-            <div className="absolute -bottom-6 -left-6 glass-blue text-white p-6 rounded-xl shadow-lg">
-              <div className="text-2xl font-bold">100+</div>
-              <div className="text-sm">Households Served</div>
+            <div className="absolute -bottom-6 left-6 rounded-[24px] border border-white/20 bg-blue-950 px-6 py-5 text-white shadow-2xl">
+              <div className="text-sm uppercase tracking-[0.22em] text-blue-200">Community Impact</div>
+              <div className="mt-2 text-3xl font-semibold">100+</div>
+              <div className="text-sm text-blue-100">Households served through water access</div>
             </div>
           </div>
         </div>
         
         <div className="mt-20">
-          <h3 className="text-3xl font-bold text-center text-blue-900 mb-12">Our Core Values</h3>
+          <h3 className="text-center font-serif text-4xl font-semibold text-blue-950">Our Core Values</h3>
           <div className="grid md:grid-cols-3 gap-8">
             {values.map((value, index) => (
-              <div key={index} className="glass-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+              <div key={index} className="surface-card lift-card p-8">
                 <div className="text-green-600 mb-4">{value.icon}</div>
-                <h4 className="text-xl font-semibold text-blue-900 mb-3">{value.title}</h4>
-                <p className="text-gray-600 leading-relaxed">{value.description}</p>
+                <h4 className="text-2xl font-semibold text-blue-950 mb-3">{value.title}</h4>
+                <p className="text-slate-600 leading-8">{value.description}</p>
               </div>
             ))}
           </div>

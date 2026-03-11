@@ -1,46 +1,139 @@
-import { useState } from 'react';
-import { Calendar, MapPin, Users, Trophy, Clock, Phone, Mail, X } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { Calendar, MapPin, Users, Trophy, Clock, Phone, Mail, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import soccerTournament from '../img/soccer-tournament.jpeg';
+
+type UpcomingPrize = {
+  position: string;
+  prize: string;
+};
+
+type UpcomingContact = {
+  name: string;
+  phone: string;
+};
+
+type UpcomingEvent = {
+  id: number;
+  title: string;
+  subtitle: string;
+  date: string;
+  time: string;
+  location: string;
+  description: string;
+  image: string;
+  type: 'upcoming';
+  registrationFee: string;
+  prizes: UpcomingPrize[];
+  contactInfo: UpcomingContact[];
+  details: {
+    teams: string;
+    format: string;
+    duration: string;
+  };
+};
 
 const Events = () => {
   const [showContactModal, setShowContactModal] = useState(false);
-  const upcomingEvents = [
-    {
-      id: 1,
-      title: "Soccer Tournament",
-      subtitle: "Nhlakanipho Dlamini Foundation Cup",
-      date: "20 & 21 December 2025",
-      time: "Full Day Event",
-      location: "Ntanyandlovu Sports Ground",
-      description: "Join us for an exciting soccer tournament bringing together 8 teams from across the community. This event promotes youth engagement, healthy competition, and community unity.",
-      image: soccerTournament,
-      type: "upcoming",
-      registrationFee: "R1100 per team",
-      prizes: [
-        { position: "1st Place", prize: "R10,000 + Jersey + Trophy + Gold Medals" },
-        { position: "2nd Place", prize: "R5,000 + Jersey + Silver Medals" },
-        { position: "3rd & 4th Place", prize: "Jersey for both teams" }
-      ],
-      contactInfo: [
-        { name: "Ntando Shoba", phone: "076 814 1030" },
-        { name: "T. Action Shelembe", phone: "082 383 4543" }
-      ],
-      details: {
-        teams: "8 Teams",
-        format: "Tournament Format",
-        duration: "2 Days"
-      }
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
+  const imageModules = import.meta.glob('../img/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}', {
+    eager: true,
+    import: 'default'
+  }) as Record<string, string>;
+
+  const eventGallery = Object.entries(imageModules)
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([path, image], index) => {
+      const fileName = path.split('/').pop()?.replace(/\.[^/.]+$/, '') ?? `Image ${index + 1}`;
+      const title = fileName
+        .replace(/[-_]+/g, ' ')
+        .replace(/\s+/g, ' ')
+        .replace(/\b\w/g, (char) => char.toUpperCase())
+        .trim();
+
+      return {
+        id: index + 1,
+        title,
+        image
+      };
+    });
+
+  const findImageByKeyword = (keywords: string[], fallback = soccerTournament) => {
+    const lowerKeywords = keywords.map((keyword) => keyword.toLowerCase());
+    const match = Object.entries(imageModules).find(([path]) => {
+      const lowerPath = path.toLowerCase();
+      return lowerKeywords.some((keyword) => lowerPath.includes(keyword));
+    });
+
+    return match?.[1] ?? fallback;
+  };
+
+  useEffect(() => {
+    if (eventGallery.length <= 1) return;
+    if (isPaused) return;
+
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % eventGallery.length);
+    }, 4500);
+
+    return () => clearInterval(interval);
+  }, [eventGallery.length, isPaused]);
+
+  useEffect(() => {
+    if (currentSlide >= eventGallery.length) {
+      setCurrentSlide(0);
     }
-  ];
+  }, [currentSlide, eventGallery.length]);
+
+  const goToPreviousSlide = () => {
+    if (eventGallery.length === 0) return;
+    setCurrentSlide((prev) => (prev - 1 + eventGallery.length) % eventGallery.length);
+  };
+
+  const goToNextSlide = () => {
+    if (eventGallery.length === 0) return;
+    setCurrentSlide((prev) => (prev + 1) % eventGallery.length);
+  };
+
+  const upcomingEvents: UpcomingEvent[] = [];
 
   const pastEvents = [
     {
+      id: 0,
+      title: "Backing My School Campaign",
+      date: "27 February 2026",
+      location: "uBongumenzi Secondary School",
+      description: "A community drive to provide school supplies, support, and resources to students in need. Community members came together to back schools and empower learners.",
+      image: findImageByKeyword(['backing', 'school', 'bongimenzi']),
+      attendees: "Community participation",
+      highlights: [
+        "School support drive completed",
+        "Community resource contributions",
+        "Learner empowerment initiative"
+      ]
+    },
+    {
       id: 1,
+      title: "Soccer Tournament",
+      date: "20 & 21 December 2025",
+      location: "Ntanyandlovu Sports Ground",
+      description: "A successful soccer tournament that brought together 8 teams from across the community, promoting youth engagement, healthy competition, and unity.",
+      image: soccerTournament,
+      attendees: "8 teams participated",
+      highlights: [
+        "R10,000 first prize awarded",
+        "Youth engagement through sport",
+        "Strong community turnout"
+      ]
+    },
+    {
+      id: 2,
       title: "June 16 Youth Day Celebration",
       date: "16 June 2024",
       location: "Nquthu Municipality",
       description: "Annual youth empowerment event featuring guest speakers from various government departments sharing their experiences and career guidance.",
-      image: null,
+      image: findImageByKeyword(['founder-community', 'kids', 'laptop', 'youth', 'principal']),
       attendees: "50+ youth participants",
       highlights: [
         "Career guidance sessions",
@@ -50,12 +143,12 @@ const Events = () => {
       ]
     },
     {
-      id: 2,
+      id: 3,
       title: "Climate Change Education Workshop",
       date: "March 2024",
       location: "Community Centers, Nquthu",
       description: "Interactive workshops teaching communities about climate change impacts on agriculture and adaptive growing techniques.",
-      image: null,
+      image: findImageByKeyword(['climate', 'education']),
       attendees: "100+ community members",
       highlights: [
         "Climate change awareness",
@@ -65,12 +158,12 @@ const Events = () => {
       ]
     },
     {
-      id: 3,
+      id: 4,
       title: "Sunrise Engozini Water Project Launch",
       date: "2023",
       location: "2 Villages, Nquthu Municipality",
       description: "Official launch of our flagship water access project bringing clean water to over 100 households.",
-      image: null,
+      image: findImageByKeyword(['tap', 'water']),
       attendees: "200+ community members",
       highlights: [
         "Water tap installations completed",
@@ -82,31 +175,125 @@ const Events = () => {
   ];
 
   return (
-    <section id="events" className="py-20 bg-gradient-to-br from-blue-50 to-green-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <div className="flex items-center justify-center mb-4">
-            <Calendar className="h-6 w-6 text-blue-600 mr-2" />
-            <span className="text-blue-600 font-semibold uppercase tracking-wide">Community Events</span>
+    <section id="events" className="section-shell bg-gradient-to-br from-blue-50/80 via-white to-green-50/70">
+      <div className="section-container">
+        <div className="section-header">
+          <div className="eyebrow text-blue-700">
+            <Calendar className="h-4 w-4" />
+            Community Events
           </div>
-          <h2 className="text-4xl font-bold text-blue-900 mb-6">
+          <h2 className="section-title">
             Events & Activities
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="section-copy">
             Join us in our mission to empower communities through engaging events, educational workshops, and celebration of our achievements together.
           </p>
         </div>
 
-        {/* Upcoming Events */}
         <div className="mb-20">
-          <h3 className="text-3xl font-bold text-blue-900 mb-8 flex items-center">
+          <div className="surface-card relative overflow-hidden p-3 shadow-2xl">
+            {eventGallery.length > 0 ? (
+              <>
+                <div
+                  className="group relative aspect-[16/10] w-full overflow-hidden rounded-[22px] bg-slate-100 md:aspect-[16/9] lg:aspect-[21/9]"
+                  onMouseEnter={() => setIsPaused(true)}
+                  onMouseLeave={() => setIsPaused(false)}
+                >
+                  {eventGallery.map((slide, index) => (
+                    <div
+                      key={slide.id}
+                      className={`absolute inset-0 transition-opacity duration-700 ${
+                        index === currentSlide ? 'opacity-100' : 'opacity-0'
+                      }`}
+                    >
+                      <img
+                        src={slide.image}
+                        alt=""
+                        aria-hidden="true"
+                        className="absolute inset-0 h-full w-full scale-110 object-cover blur-2xl brightness-75"
+                      />
+                      <div className="absolute inset-0 bg-black/35" />
+                      <img
+                        src={slide.image}
+                        alt={slide.title}
+                        className="relative z-10 h-full w-full object-contain p-3 sm:p-5"
+                      />
+                    </div>
+                  ))}
+
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
+
+                  <button
+                    onClick={goToPreviousSlide}
+                    className="absolute left-4 top-1/2 z-20 -translate-y-1/2 rounded-full bg-black/45 p-2.5 text-white transition-all hover:bg-black/70"
+                    aria-label="Previous event image"
+                  >
+                    <ChevronLeft className="h-6 w-6" />
+                  </button>
+
+                  <button
+                    onClick={goToNextSlide}
+                    className="absolute right-4 top-1/2 z-20 -translate-y-1/2 rounded-full bg-black/45 p-2.5 text-white transition-all hover:bg-black/70"
+                    aria-label="Next event image"
+                  >
+                    <ChevronRight className="h-6 w-6" />
+                  </button>
+                </div>
+
+                <div className="bg-white/80 px-3 py-4">
+                  <div className="mb-3 flex items-center justify-center gap-2">
+                    {eventGallery.map((slide, index) => (
+                      <button
+                        key={slide.id}
+                        onClick={() => setCurrentSlide(index)}
+                        aria-label={`Go to ${slide.title}`}
+                        className={`h-2.5 rounded-full transition-all ${
+                          index === currentSlide ? 'w-8 bg-green-600' : 'w-2.5 bg-gray-400 hover:bg-gray-500'
+                        }`}
+                      />
+                    ))}
+                  </div>
+
+                  <div className="flex gap-2 overflow-x-auto pb-1">
+                    {eventGallery.map((slide, index) => (
+                      <button
+                        key={`thumb-${slide.id}`}
+                        onClick={() => setCurrentSlide(index)}
+                        className={`relative h-14 w-20 shrink-0 overflow-hidden rounded-lg border-2 transition-all ${
+                          index === currentSlide
+                            ? 'border-green-500 ring-2 ring-green-200'
+                            : 'border-transparent opacity-70 hover:opacity-100'
+                        }`}
+                        aria-label={`Preview ${slide.title}`}
+                      >
+                        <img src={slide.image} alt={slide.title} className="h-full w-full object-cover" />
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </>
+            ) : (
+              <div className="p-8 text-center text-slate-600">
+                No images found in the img folder.
+              </div>
+            )}
+          </div>
+        </div>
+
+        <div className="mb-20">
+          <h3 className="mb-8 flex items-center font-serif text-4xl font-semibold text-blue-950">
             <Calendar className="h-8 w-8 text-green-600 mr-3" />
             Upcoming Events
           </h3>
+
+          {upcomingEvents.length === 0 && (
+            <div className="surface-card mb-8 p-6 text-center text-slate-600">
+              No upcoming events right now. Please check back soon.
+            </div>
+          )}
           
           {upcomingEvents.map((event) => (
-            <div key={event.id} className="glass-white rounded-3xl overflow-hidden shadow-2xl">
+            <div key={event.id} className="surface-card overflow-hidden">
               <div className="grid lg:grid-cols-2 gap-8">
                 {/* Event Image */}
                 <div className="relative h-96 lg:h-auto">
@@ -122,7 +309,7 @@ const Events = () => {
 
                 {/* Event Details */}
                 <div className="p-8 lg:p-12">
-                  <h4 className="text-3xl font-bold text-blue-900 mb-2">{event.title}</h4>
+                  <h4 className="font-serif text-4xl font-semibold text-blue-950 mb-2">{event.title}</h4>
                   <p className="text-xl text-green-600 font-semibold mb-6">{event.subtitle}</p>
                   
                   <div className="space-y-4 mb-6">
@@ -157,7 +344,7 @@ const Events = () => {
                     </h5>
                     <div className="space-y-2">
                       {event.prizes.map((prize, idx) => (
-                        <div key={idx} className="glass rounded-lg p-3">
+                        <div key={idx} className="rounded-2xl bg-slate-50 p-3">
                           <span className="font-semibold text-blue-900">{prize.position}:</span>
                           <span className="text-gray-700 ml-2">{prize.prize}</span>
                         </div>
@@ -182,7 +369,7 @@ const Events = () => {
                   {/* CTA Button */}
                   <button 
                     onClick={() => setShowContactModal(true)}
-                    className="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-4 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center"
+                    className="elegant-button-primary w-full px-6 py-4"
                   >
                     <Phone className="mr-2 h-5 w-5" />
                     Register Your Team
@@ -193,23 +380,30 @@ const Events = () => {
           ))}
         </div>
 
-        {/* Past Events */}
         <div>
-          <h3 className="text-3xl font-bold text-blue-900 mb-8 flex items-center">
+          <h3 className="mb-8 flex items-center font-serif text-4xl font-semibold text-blue-950">
             <Clock className="h-8 w-8 text-blue-600 mr-3" />
             Past Events
           </h3>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {pastEvents.map((event) => (
-              <div key={event.id} className="glass-white rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+              <div key={event.id} className="surface-card lift-card p-6">
+                <div className="mb-5 overflow-hidden rounded-2xl bg-slate-100">
+                  <img
+                    src={event.image}
+                    alt={event.title}
+                    className="h-52 w-full object-cover"
+                  />
+                </div>
+
                 <div className="mb-4">
-                  <h4 className="text-xl font-bold text-blue-900 mb-2">{event.title}</h4>
-                  <div className="flex items-center text-gray-600 text-sm mb-2">
+                  <h4 className="text-2xl font-semibold text-blue-950 mb-2">{event.title}</h4>
+                  <div className="flex items-center text-slate-500 text-sm mb-2">
                     <Calendar className="h-4 w-4 mr-2" />
                     {event.date}
                   </div>
-                  <div className="flex items-center text-gray-600 text-sm mb-3">
+                  <div className="flex items-center text-slate-500 text-sm mb-3">
                     <MapPin className="h-4 w-4 mr-2" />
                     {event.location}
                   </div>
@@ -221,14 +415,14 @@ const Events = () => {
                   )}
                 </div>
 
-                <p className="text-gray-700 text-sm leading-relaxed mb-4">{event.description}</p>
+                <p className="text-slate-700 text-sm leading-7 mb-4">{event.description}</p>
 
                 {event.highlights && (
                   <div>
-                    <h5 className="font-semibold text-blue-900 text-sm mb-2">Highlights:</h5>
+                    <h5 className="font-semibold text-blue-900 text-sm mb-2 uppercase tracking-[0.18em]">Highlights</h5>
                     <ul className="space-y-1">
                       {event.highlights.map((highlight, idx) => (
-                        <li key={idx} className="text-gray-600 text-xs flex items-start">
+                        <li key={idx} className="text-slate-600 text-xs flex items-start leading-6">
                           <span className="text-green-500 mr-2">•</span>
                           {highlight}
                         </li>
@@ -241,23 +435,22 @@ const Events = () => {
           </div>
         </div>
 
-        {/* CTA Section */}
-        <div className="mt-16 glass-blue rounded-3xl p-8 lg:p-12 text-center text-white">
-          <h3 className="text-3xl font-bold mb-4">Stay Updated on Our Events</h3>
+        <div className="surface-card mt-16 bg-blue-950 p-8 text-center text-white lg:p-12">
+          <h3 className="font-serif text-4xl font-semibold mb-4">Stay Updated on Our Events</h3>
           <p className="text-lg text-blue-100 mb-8 max-w-2xl mx-auto">
             Don't miss out on upcoming community events, workshops, and celebrations. Get in touch to learn more or participate.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button 
               onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-              className="bg-white text-blue-900 hover:bg-gray-100 px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center"
+              className="elegant-button-secondary px-8 py-4"
             >
               <Mail className="mr-2 h-5 w-5" />
               Contact Us
             </button>
             <button 
               onClick={() => document.getElementById('donate')?.scrollIntoView({ behavior: 'smooth' })}
-              className="border-2 border-white text-white hover:bg-white hover:text-blue-900 px-8 py-4 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center"
+              className="inline-flex items-center justify-center rounded-full border border-white/25 px-8 py-4 font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-white hover:text-blue-950"
             >
               Support Our Events
             </button>
@@ -268,7 +461,7 @@ const Events = () => {
       {/* Registration Contact Modal */}
       {showContactModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl p-8 max-w-md w-full shadow-2xl relative">
+          <div className="bg-white rounded-[28px] p-8 max-w-md w-full shadow-2xl relative">
             <button
               onClick={() => setShowContactModal(false)}
               className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"

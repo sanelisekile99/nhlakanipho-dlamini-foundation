@@ -50,44 +50,40 @@ const Donate = () => {
   };
 
   return (
-    <section id="donate" className="py-20 bg-gradient-to-br from-green-50 to-blue-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <div className="flex items-center justify-center mb-4">
-            <Heart className="h-6 w-6 text-green-600 mr-2" />
-            <span className="text-green-600 font-semibold uppercase tracking-wide">Make a Difference</span>
+    <section id="donate" className="section-shell bg-gradient-to-br from-green-50/80 via-white to-blue-50/80">
+      <div className="section-container">
+        <div className="section-header">
+          <div className="eyebrow text-green-700">
+            <Heart className="h-4 w-4" />
+            Make a Difference
           </div>
-          <h2 className="text-4xl font-bold text-blue-900 mb-6">
+          <h2 className="section-title">
             Support Our Mission
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="section-copy">
             Your donation helps us provide clean water, promote sustainable agriculture, educate communities about climate change, and empower youth across Nquthu municipality.
           </p>
         </div>
 
-        {/* Donation Impact Cards */}
         <div className="mb-16">
-          <h3 className="text-2xl font-bold text-center text-blue-900 mb-8">Where Your Donation Goes</h3>
+          <h3 className="mb-8 text-center font-serif text-4xl font-semibold text-blue-950">Where Your Donation Goes</h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
             {donationImpact.map((item, index) => (
-              <div key={index} className="glass-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+              <div key={index} className="surface-card lift-card p-6">
                 <div className="text-green-600 mb-3">{item.icon}</div>
-                <div className="text-xl font-bold text-blue-900 mb-2">{item.title}</div>
-                <p className="text-gray-600 text-sm">{item.impact}</p>
+                <div className="text-2xl font-semibold text-blue-950 mb-2">{item.title}</div>
+                <p className="text-slate-600 text-sm leading-7">{item.impact}</p>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Main Donation CTA */}
-        <div className="glass-white rounded-3xl p-8 lg:p-12 shadow-2xl">
+        <div className="surface-card p-8 lg:p-12">
           <div className="text-center mb-8">
-            <h3 className="text-3xl font-bold text-blue-900 mb-4">Choose Your Donation Amount</h3>
-            <p className="text-gray-600">Every contribution, big or small, makes a real difference in our communities.</p>
+            <h3 className="font-serif text-4xl font-semibold text-blue-950 mb-4">Choose Your Donation Amount</h3>
+            <p className="text-slate-600">Every contribution, big or small, makes a real difference in our communities.</p>
           </div>
 
-          {/* Quick Amount Selection */}
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
             {predefinedAmounts.map((amount) => (
               <button
@@ -99,7 +95,7 @@ const Donate = () => {
                 className={`p-4 rounded-lg font-semibold transition-all duration-300 ${
                   selectedAmount === amount
                     ? 'bg-green-500 text-white shadow-lg scale-105'
-                    : 'bg-white text-blue-900 hover:bg-green-50 border-2 border-gray-200'
+                    : 'bg-white text-blue-950 hover:bg-green-50 border border-slate-200 shadow-sm'
                 }`}
               >
                 R{amount}
@@ -107,7 +103,6 @@ const Donate = () => {
             ))}
           </div>
 
-          {/* Custom Amount */}
           <div className="mb-8">
             <label className="block text-sm font-medium text-gray-700 mb-2">Or Enter Custom Amount</label>
             <div className="relative">
@@ -119,7 +114,7 @@ const Donate = () => {
                   setCustomAmount(e.target.value);
                   setSelectedAmount('');
                 }}
-                className="w-full pl-10 pr-4 py-4 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-colors text-lg"
+                className="input-elegant pl-10 text-lg"
                 placeholder="Enter amount"
                 min="1"
               />
@@ -135,7 +130,7 @@ const Donate = () => {
                 className={`p-4 rounded-lg font-semibold transition-all duration-300 ${
                   donationType === 'once'
                     ? 'bg-blue-600 text-white shadow-lg'
-                    : 'bg-white text-blue-900 hover:bg-blue-50 border-2 border-gray-200'
+                    : 'bg-white text-blue-950 hover:bg-blue-50 border border-slate-200 shadow-sm'
                 }`}
               >
                 One-Time Donation
@@ -145,7 +140,7 @@ const Donate = () => {
                 className={`p-4 rounded-lg font-semibold transition-all duration-300 ${
                   donationType === 'monthly'
                     ? 'bg-blue-600 text-white shadow-lg'
-                    : 'bg-white text-blue-900 hover:bg-blue-50 border-2 border-gray-200'
+                    : 'bg-white text-blue-950 hover:bg-blue-50 border border-slate-200 shadow-sm'
                 }`}
               >
                 Monthly Donation
@@ -167,7 +162,6 @@ const Donate = () => {
             Donate Now
           </button>
 
-          {/* Payment Info */}
           <div className="mt-8 grid md:grid-cols-3 gap-6 text-center">
             <div className="flex flex-col items-center">
               <CreditCard className="h-8 w-8 text-green-600 mb-2" />
@@ -184,26 +178,25 @@ const Donate = () => {
           </div>
         </div>
 
-        {/* Other Ways to Give */}
         <div className="mt-16">
-          <h3 className="text-2xl font-bold text-center text-blue-900 mb-8">Other Ways to Give</h3>
+          <h3 className="text-center font-serif text-4xl font-semibold text-blue-950 mb-8">Other Ways to Give</h3>
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="glass-white p-6 rounded-xl shadow-lg text-center">
+            <div className="surface-card p-6 text-center">
               <Building className="h-12 w-12 text-blue-600 mx-auto mb-4" />
-              <h4 className="text-xl font-semibold text-blue-900 mb-3">Bank Transfer</h4>
-              <p className="text-gray-600 mb-4">Direct deposit to our foundation account</p>
+              <h4 className="text-2xl font-semibold text-blue-950 mb-3">Bank Transfer</h4>
+              <p className="text-slate-600 mb-4">Direct deposit to our foundation account</p>
               <button className="text-green-600 font-semibold hover:text-green-700">View Details</button>
             </div>
-            <div className="glass-white p-6 rounded-xl shadow-lg text-center">
+            <div className="surface-card p-6 text-center">
               <Smartphone className="h-12 w-12 text-blue-600 mx-auto mb-4" />
-              <h4 className="text-xl font-semibold text-blue-900 mb-3">Mobile Money</h4>
-              <p className="text-gray-600 mb-4">Donate via mobile payment platforms</p>
+              <h4 className="text-2xl font-semibold text-blue-950 mb-3">Mobile Money</h4>
+              <p className="text-slate-600 mb-4">Donate via mobile payment platforms</p>
               <button className="text-green-600 font-semibold hover:text-green-700">Learn More</button>
             </div>
-            <div className="glass-white p-6 rounded-xl shadow-lg text-center">
+            <div className="surface-card p-6 text-center">
               <Heart className="h-12 w-12 text-blue-600 mx-auto mb-4" />
-              <h4 className="text-xl font-semibold text-blue-900 mb-3">In-Kind Donations</h4>
-              <p className="text-gray-600 mb-4">Contribute materials, supplies, or services</p>
+              <h4 className="text-2xl font-semibold text-blue-950 mb-3">In-Kind Donations</h4>
+              <p className="text-slate-600 mb-4">Contribute materials, supplies, or services</p>
               <button className="text-green-600 font-semibold hover:text-green-700">Contact Us</button>
             </div>
           </div>
@@ -213,7 +206,7 @@ const Donate = () => {
       {/* Payment Modal */}
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl p-8 max-w-md w-full shadow-2xl relative">
+          <div className="bg-white rounded-[28px] p-8 max-w-md w-full shadow-2xl relative">
             <button
               onClick={() => setShowModal(false)}
               className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
@@ -221,7 +214,7 @@ const Donate = () => {
               <X className="h-6 w-6" />
             </button>
 
-            <h3 className="text-2xl font-bold text-blue-900 mb-6">Complete Your Donation</h3>
+            <h3 className="font-serif text-3xl font-semibold text-blue-950 mb-6">Complete Your Donation</h3>
 
             <div className="mb-6 p-4 bg-green-50 rounded-lg">
               <div className="flex justify-between items-center">
@@ -245,7 +238,7 @@ const Donate = () => {
                   <button
                     type="button"
                     onClick={() => setPaymentMethod('card')}
-                    className={`p-3 rounded-lg border-2 ${
+                    className={`p-3 rounded-2xl border-2 ${
                       paymentMethod === 'card'
                         ? 'border-green-500 bg-green-50'
                         : 'border-gray-200'
@@ -257,7 +250,7 @@ const Donate = () => {
                   <button
                     type="button"
                     onClick={() => setPaymentMethod('bank')}
-                    className={`p-3 rounded-lg border-2 ${
+                    className={`p-3 rounded-2xl border-2 ${
                       paymentMethod === 'bank'
                         ? 'border-green-500 bg-green-50'
                         : 'border-gray-200'
@@ -275,7 +268,7 @@ const Donate = () => {
                     <label className="block text-sm font-medium text-gray-700 mb-2">Card Number</label>
                     <input
                       type="text"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none"
+                      className="input-elegant"
                       placeholder="1234 5678 9012 3456"
                       required
                     />
@@ -285,7 +278,7 @@ const Donate = () => {
                       <label className="block text-sm font-medium text-gray-700 mb-2">Expiry Date</label>
                       <input
                         type="text"
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none"
+                        className="input-elegant"
                         placeholder="MM/YY"
                         required
                       />
@@ -294,7 +287,7 @@ const Donate = () => {
                       <label className="block text-sm font-medium text-gray-700 mb-2">CVV</label>
                       <input
                         type="text"
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none"
+                        className="input-elegant"
                         placeholder="123"
                         required
                       />
@@ -307,7 +300,7 @@ const Donate = () => {
                 <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
                 <input
                   type="email"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none"
+                  className="input-elegant"
                   placeholder="your.email@example.com"
                   required
                 />
@@ -315,7 +308,7 @@ const Donate = () => {
 
               <button
                 type="submit"
-                className="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-4 px-6 rounded-lg transition-colors duration-300"
+                className="elegant-button-primary w-full px-6 py-4"
               >
                 Complete Donation
               </button>

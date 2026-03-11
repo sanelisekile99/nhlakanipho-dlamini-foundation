@@ -71,58 +71,58 @@ const Impact = () => {
   ];
 
   return (
-    <section id="impact" className="py-20 bg-gradient-to-br from-blue-50 to-green-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <div className="flex items-center justify-center mb-4">
-            <TrendingUp className="h-6 w-6 text-green-600 mr-2" />
-            <span className="text-green-600 font-semibold uppercase tracking-wide">Our Impact</span>
+    <section id="impact" className="section-shell bg-gradient-to-br from-blue-50/80 via-white to-green-50/70">
+      <div className="section-container">
+        <div className="section-header">
+          <div className="eyebrow text-green-700">
+            <TrendingUp className="h-4 w-4" />
+            Our Impact
           </div>
-          <h2 className="text-4xl font-bold text-blue-900 mb-6">
+          <h2 className="section-title">
             Transforming Lives Across Nquthu Municipality
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="section-copy">
             Every number represents real lives improved, communities strengthened, and sustainable solutions implemented through our comprehensive development programs.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
           {stats.map((stat, index) => (
-            <div key={index} className="glass-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 text-center transform hover:scale-105">
+            <div key={index} className="surface-card lift-card p-8 text-center">
               <div className="text-blue-600 mb-4 flex justify-center">{stat.icon}</div>
-              <div className="text-4xl font-bold text-blue-900 mb-2">{stat.number}</div>
-              <div className="text-lg font-semibold text-blue-900 mb-2">{stat.label}</div>
-              <div className="text-gray-600 text-sm">{stat.description}</div>
+              <div className="text-4xl font-semibold text-blue-950 mb-2">{stat.number}</div>
+              <div className="text-lg font-semibold text-blue-950 mb-2">{stat.label}</div>
+              <div className="text-slate-600 text-sm leading-7">{stat.description}</div>
             </div>
           ))}
         </div>
 
         <div className="mb-20">
-          <h3 className="text-3xl font-bold text-center text-blue-900 mb-12">Our Program Areas</h3>
+          <h3 className="text-center font-serif text-4xl font-semibold text-blue-950 mb-12">Our Program Areas</h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {programs.map((program, index) => (
-              <div key={index} className="glass-white rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 text-center transform hover:scale-105">
+              <div key={index} className="surface-card lift-card p-6 text-center">
                 <div className="text-green-600 mb-4 flex justify-center">{program.icon}</div>
-                <h4 className="text-lg font-semibold text-blue-900 mb-2">{program.title}</h4>
-                <p className="text-gray-600 text-sm">{program.description}</p>
+                <h4 className="text-2xl font-semibold text-blue-950 mb-2">{program.title}</h4>
+                <p className="text-slate-600 text-sm leading-7">{program.description}</p>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="glass-white rounded-3xl p-8 lg:p-12 shadow-2xl">
-          <h3 className="text-3xl font-bold text-center text-blue-900 mb-12">Community Voices</h3>
+        <div className="surface-card p-8 lg:p-12">
+          <h3 className="text-center font-serif text-4xl font-semibold text-blue-950 mb-12">Community Voices</h3>
           <div className="grid lg:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
-              <div key={index} className="flex flex-col">
+              <div key={index} className="flex flex-col rounded-[24px] bg-slate-50 p-6">
                 <div className="flex-1">
-                  <blockquote className="text-gray-700 leading-relaxed mb-6 italic">
+                  <blockquote className="mb-6 text-slate-700 italic leading-8">
                     "{testimonial.content}"
                   </blockquote>
                 </div>
                 <div>
-                  <div className="font-semibold text-blue-900 text-sm">{testimonial.name}</div>
-                  <div className="text-gray-600 text-xs">{testimonial.role}</div>
+                  <div className="font-semibold text-blue-950 text-sm">{testimonial.name}</div>
+                  <div className="text-slate-500 text-xs uppercase tracking-[0.18em]">{testimonial.role}</div>
                 </div>
               </div>
             ))}

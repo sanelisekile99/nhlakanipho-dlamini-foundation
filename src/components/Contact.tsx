@@ -46,30 +46,32 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-20 bg-blue-900 text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <div className="flex items-center justify-center mb-4">
-            <Send className="h-6 w-6 text-green-400 mr-2" />
-            <span className="text-green-400 font-semibold uppercase tracking-wide">Get In Touch</span>
+    <section id="contact" className="section-shell overflow-hidden bg-blue-950 text-white">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(34,197,94,0.15),transparent_25%),linear-gradient(180deg,#0f172a_0%,#172554_100%)]"></div>
+      <div className="absolute inset-0 subtle-grid opacity-15"></div>
+      <div className="section-container relative">
+        <div className="section-header">
+          <div className="eyebrow border-white/10 bg-white/10 text-green-300">
+            <Send className="h-4 w-4" />
+            Get In Touch
           </div>
-          <h2 className="text-4xl font-bold mb-6">
+          <h2 className="section-title text-white">
             Join Our Mission
           </h2>
-          <p className="text-xl text-blue-100 max-w-3xl mx-auto">
+          <p className="section-copy text-blue-100">
             Whether you want to volunteer, partner with us, or learn about our work, we'd love to hear from you. Together, we can continue transforming communities.
           </p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-16">
           <div>
-            <h3 className="text-2xl font-bold mb-8">Contact Information</h3>
+            <h3 className="font-serif text-4xl font-semibold mb-8">Contact Information</h3>
             <div className="space-y-8">
               {contactInfo.map((info, index) => (
-                <div key={index} className="flex">
-                  <div className="text-green-400 mr-4 mt-1">{info.icon}</div>
+                <div key={index} className="surface-card-dark flex items-start gap-4 p-6">
+                  <div className="rounded-2xl bg-white/10 p-3 text-green-300">{info.icon}</div>
                   <div>
-                    <h4 className="font-semibold text-lg mb-2">{info.title}</h4>
+                    <h4 className="font-semibold text-xl mb-2 text-white">{info.title}</h4>
                     {info.details.map((detail, idx) => (
                       <p key={idx} className="text-blue-100">{detail}</p>
                     ))}
@@ -78,9 +80,9 @@ const Contact = () => {
               ))}
             </div>
 
-            <div className="mt-12 p-6 glass rounded-xl">
-              <h4 className="font-semibold text-lg mb-3">How You Can Help</h4>
-              <ul className="space-y-2 text-blue-100">
+            <div className="surface-card-dark mt-12 p-8">
+              <h4 className="font-serif text-3xl font-semibold mb-4">How You Can Help</h4>
+              <ul className="space-y-3 text-blue-100">
                 <li>• Volunteer for community projects</li>
                 <li>• Donate to water infrastructure initiatives</li>
                 <li>• Partner with us on sustainability programs</li>
@@ -89,9 +91,9 @@ const Contact = () => {
             </div>
           </div>
 
-          <div className="glass-white text-gray-900 rounded-2xl p-8 shadow-2xl">
-            <h3 className="text-2xl font-bold text-blue-900 mb-6">Send us a Message</h3>
-            {success && <div className="mb-4 text-green-600 font-semibold">Thank you! Your message has been sent.</div>}
+          <div className="surface-card p-8 text-gray-900 lg:p-10">
+            <h3 className="font-serif text-4xl font-semibold text-blue-950 mb-6">Send us a Message</h3>
+            {success && <div className="mb-4 rounded-2xl bg-green-50 px-4 py-3 text-green-700 font-semibold">Thank you! Your message has been sent.</div>}
             <form className="space-y-6" onSubmit={handleSubmit}>
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
@@ -101,7 +103,7 @@ const Contact = () => {
                     name="firstName"
                     value={form.firstName}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-colors"
+                    className="input-elegant"
                     placeholder="Your first name"
                     required
                   />
@@ -113,7 +115,7 @@ const Contact = () => {
                     name="lastName"
                     value={form.lastName}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-colors"
+                    className="input-elegant"
                     placeholder="Your last name"
                     required
                   />
@@ -126,7 +128,7 @@ const Contact = () => {
                   name="email"
                   value={form.email}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-colors"
+                  className="input-elegant"
                   placeholder="your.email@example.com"
                   required
                 />
@@ -137,7 +139,7 @@ const Contact = () => {
                   name="subject"
                   value={form.subject}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-colors"
+                  className="input-elegant"
                 >
                   <option>General Inquiry</option>
                   <option>Volunteer Opportunities</option>
@@ -153,14 +155,14 @@ const Contact = () => {
                   rows={5}
                   value={form.message}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-colors resize-none"
+                  className="input-elegant resize-none"
                   placeholder="Tell us how you'd like to get involved or any questions you have..."
                   required
                 ></textarea>
               </div>
               <button
                 type="submit"
-                className="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-4 px-6 rounded-lg transition-colors duration-300 flex items-center justify-center"
+                className="elegant-button-primary w-full px-6 py-4"
                 disabled={loading}
               >
                 {loading ? 'Sending...' : 'Send Message'}
